@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Open Weather</title>
+    <!-- Посилання на таблицю стилів для розділів документу -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Faster+One"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="ajax.css" />
+  </head>
+  <body>
+    <!--В цих розділах документу будуть дані про погоду-->
+    <header></header>
+    <section></section>
+
+    <script type="text/javascript">
+      var header = document.querySelector("header");
+      var section = document.querySelector("section");
+
+      //Запит погоди для Парижу (id=2968815)
+      var requestURL =
+        "http://api.openweathermap.org/data/2.5/weather?id=2968815";
+
+      //До запиту додається власний API Key
+      requestURL = requestURL + "&appid=8bde436b2de5debb9f4b43f3668e0a32";
+      var request = new XMLHttpRequest();
+      request.open("GET", requestURL);
+      request.responseType = "json";
+
+      //Відправка запиту
+      request.send();
+      request.onload = function () //Ця функція виконується після отримання відповіді
+      {
+        var cityweather_json = request.response;
+        showWeather(cityweather_json);
+      };
+
+      //Виведення даних щодо погоди
+      function showWeather(jsonObj) {
+        var d = new Date();
+        var sHead = "Париж, поточна дата: " + d.toDateString(d) + " р. ";
+        //Доступ до даних отриманого JSONоб'єкта спирається на його ієрархічну структуру
+        sHead =
+          sHead +
+          "Довгота: " +
+          jsonObj.coord.lon +
+          " Широта: " +
+          jsonObj.coord.lat;
+        var myArticle = document.createElement("article");
+        var myH1 = document.createElement("h1");
+        myH1.textContent = sHead;
+        myArticle.appendChild(myH1);
+
+        //Інформація про місто буде в заголовку секції
+        section.appendChild(myArticle);
+
+        //Дані погоди будуть у звичайних рядках
+        var myArticle = document.createElement("article");
+        var myPara1 = document.createElement("p");
+        var myPara2 = document.createElement("p");
+        var myPara3 = document.createElement("p");
+
+        //Переводимо у градуси Цельсія
+        var t1 = Math.round(jsonObj.main.temp - 273.16);
+        var t2 = Math.round(jsonObj.main.feels_like - 273.16);
+        myPara1.textContent = "Температура: " + t1 + " градусів по Цельсію";
+        myPara2.textContent = "Відчувається як: " + t2 + " градусів по Цельсію";
+        myPara3.textContent = "Вітер: " + jsonObj.wind.speed + " м/сек";
+
+        //Збираємо що вийшло, і документ відображається
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        section.appendChild(myArticle);
+      }
+    </script>
+  </body>
+</html>
