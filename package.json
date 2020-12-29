@@ -1,0 +1,23 @@
+{
+  "name": "is-81-003",
+  "version": "1.0.0",
+  "description": "Студентка групи ІС-81:\r Бишовець Наталія Миколаївна.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapitoshka24/is-81-003.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kapitoshka24/is-81-003/issues"
+  },
+  "homepage": "https://github.com/kapitoshka24/is-81-003#readme",
+  "dependencies": {
+    "pg": "^8.5.1"
+  }
+}
