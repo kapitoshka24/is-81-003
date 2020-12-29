@@ -8,7 +8,6 @@ const pool = new pg.Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-//pool.query(`create table "users-pis"`);
 // pool.query(`CREATE TABLE films (
 //     title       varchar(40) NOT NULL,
 //     kind        varchar(10)
